@@ -362,7 +362,7 @@ def root_enabled_check():
     sp = subprocess.Popen(['/usr/bin/dscl', '-plist', '.', '-read', '/Users/root/'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = sp.communicate()
 
-    root_plist = plutil.readPlistFromString(out)
+    root_plist = plistlib.readPlistFromString(out)
 
     try:
         if len(root_plist['dsAttrTypeStandard:Password']) > 1:
