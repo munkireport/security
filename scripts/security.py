@@ -353,6 +353,25 @@ def skel_state_check():
         return 1 # if the OS is < 10.13, KEXT loading is open by default.
 
 
+def root_enabled_check():
+    """Checks to see if the root user is enabled or disabled."""
+    sp = subprocess.Popen(['/usr/bin/dscl', '-plist', '.', '-read', '/Users/root/'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = sp.communicate()
+
+    root_plist = plutil.readPlistFromString(out)
+
+    try:
+        if len(plist['dsAttrTypeStandard:Password']) > 1:
+            # several *s in output means password is set and account is enabled
+            return 1 
+        else:
+            # a single * means the password is set but account is disabled
+            return 0
+    except KeyError:
+        # root pw has never been set, so it is disabled
+            return 0
+
+
 def main():
     """main"""
 
@@ -378,6 +397,7 @@ def main():
     result.update({'firmwarepw': firmware_pw_check()})
     result.update({'firewall_state':firewall_enable_check()})
     result.update({'skel_state':skel_state_check()})
+    result.update({'root_user':root_enabled_check()})
 
     # Write results of checks to cache file
     output_plist = os.path.join(cachedir, 'security.plist')
