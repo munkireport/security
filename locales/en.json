@@ -8,6 +8,8 @@
     "gatekeeper_active": "Gatekeeper Active",
     "gatekeeper_disabled": "Gatekeeper Disabled",
     "report": "Security Report",
+    "root_user": "Root User",
+    "root_user_status": "Root User Status",
     "security": "Security",
     "sip": "SIP Status",
     "sip_active": "SIP Active",

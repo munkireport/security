@@ -18,6 +18,7 @@ class Security_model extends \Model
         $this->rs['firmwarepw'] = '';
         $this->rs['firewall_state'] = '';
         $this->rs['skel_state'] = '';
+        $this->rs['root_user'] = '';
 
         if ($serial) {
             $this->retrieve_record($serial);
@@ -47,7 +48,7 @@ class Security_model extends \Model
 
     		$plist = $parser->toArray();
 
-    		foreach (array('sip', 'gatekeeper', 'ssh_groups', 'ssh_users', 'ard_groups', 'ard_users', 'firmwarepw', 'firewall_state', 'skel_state') as $item) {
+    		foreach (array('sip', 'gatekeeper', 'ssh_groups', 'ssh_users', 'ard_groups', 'ard_users', 'firmwarepw', 'firewall_state', 'skel_state', 'root_user') as $item) {
     			if (isset($plist[$item])) {
     				$this->$item = $plist[$item];
     			} else {
@@ -116,6 +117,16 @@ class Security_model extends \Model
                 FROM security
                 LEFT JOIN reportdata USING(serial_number)
         ".get_machine_group_filter();
+    return current($this->query($sql));
+    }
+
+    public function get_root_user_stats()
+    {
+    $sql = "SELECT COUNT(CASE WHEN root_user = '0' THEN 1 END) as disabled,
+                COUNT(CASE WHEN root_user = '1' THEN 1 END) as enabled
+                FROM security
+                LEFT JOIN reportdata USING(serial_number)
+            ".get_machine_group_filter();
     return current($this->query($sql));
     }
 

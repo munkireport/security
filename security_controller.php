@@ -185,4 +185,30 @@ class Security_controller extends Module_controller
         $obj->view('json', array('msg' => $out));
     }
 
+    /**
+     * Get Root User statistics
+     *
+     * @return void
+     * @author rickheil
+     **/
+
+
+    public function get_root_user_stats()
+    {
+        $obj = new View();
+
+        if (! $this->authorized()) {
+            $obj->view('json', array('msg' => array('error' => 'Not authenticated')));
+            return;
+        }
+                $ssh_report = new Security_model;
+
+                $out = array();
+                $out['stats'] = $ssh_report->get_root_user_stats();
+
+
+        $obj->view('json', array('msg' => $out));
+    }
+
+
 } // END class default_module

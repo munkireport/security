@@ -11,6 +11,10 @@ sys.path.insert(0, '/usr/local/munki')
 
 from munkilib import FoundationPlist
 
+# Disable PyLint complaining about 'invalid' names and lines too long
+# pylint: disable=C0103
+# pylint: disable=C0301
+
 def gatekeeper_check():
     """ Gatekeeper checks. Simply calls the spctl and parses status. Requires 10.7+"""
 
@@ -48,7 +52,7 @@ def sip_check():
 
 
 def ssh_user_access_check():
-    """Check for users who can log in via SSH 
+    """Check for users who can log in via SSH
     using the built-in group reporting.
     Checks for explicitly added users , both local and directory based."""
 
@@ -80,7 +84,7 @@ def ssh_user_access_check():
             user_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.access_ssh', 'GroupMembership'], stdout=subprocess.PIPE)
             user_out, user_err = user_sp.communicate()
             user_list = user_out.split()
-                
+
             return ', '.join(item for item in user_list[1:])
 
         else:
@@ -89,7 +93,7 @@ def ssh_user_access_check():
             return "All users permitted"
 
 def ssh_group_access_check():
-    """Check for groups that have members who can log in via SSH 
+    """Check for groups that have members who can log in via SSH
     using the built-in group reporting.
     Checks for explicitly added groups, both local and directory based."""
 
@@ -112,7 +116,7 @@ def ssh_group_access_check():
         out, err = sp.communicate()
 
         if "com.apple.access_ssh-disabled" in out:
-            # if this group exists, all users are permitted to access SSH. 
+            # if this group exists, all users are permitted to access SSH.
             # Nothing group specific
             pass
 
@@ -121,20 +125,20 @@ def ssh_group_access_check():
             group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.access_ssh', 'NestedGroups'], stdout=subprocess.PIPE)
             group_out, group_err = group_sp.communicate()
             group_list_uuid = group_out.split()
-            
+
             # Translate group UUIDs to gids
             group_list = []
             for group_uuid in group_list_uuid[1:]:
                 group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
                 group_id_out, group_id_err = group_id_sp.communicate()
                 group_list.append(grp.getgrgid(group_id_out.split()[1]).gr_name)
-                
+
             return ', '.join(item for item in group_list)
 
         else:
             # If neither SSH group exists but SSH is enabled, it was turned on with
             # systemsetup and all users are enabled.
-            # Nothing group specific            
+            # Nothing group specific
             pass
 
 def ard_access_check():
@@ -176,7 +180,7 @@ def ard_access_check():
             if "com.apple.local.ard_interact" in remote_out:
                 ard_gm_check = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_interact'], stdout=subprocess.PIPE)
                 ard_gm_check_out, ard_gm_check_err = ard_gm_check.communicate()
-                
+
                 if "GroupMembership" in ard_gm_check_out:
                     ard_user_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_interact', 'GroupMembership'], stdout=subprocess.PIPE)
                     ard_user_out, ard_user_err = ard_user_sp.communicate()
@@ -186,7 +190,7 @@ def ard_access_check():
             if "com.apple.local.ard_admin" in remote_out:
                 ard_gm_check = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_admin'], stdout=subprocess.PIPE)
                 ard_gm_check_out, ard_gm_check_err = ard_gm_check.communicate()
-                
+
                 if "GroupMembership" in ard_gm_check_out:
                     ard_user_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_admin', 'GroupMembership'], stdout=subprocess.PIPE)
                     ard_user_out, ard_user_err = ard_user_sp.communicate()
@@ -197,7 +201,7 @@ def ard_access_check():
             if "com.apple.local.ard_manage" in remote_out:
                 ard_gm_check = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_manage'], stdout=subprocess.PIPE)
                 ard_gm_check_out, ard_gm_check_err = ard_gm_check.communicate()
-                
+
                 if "GroupMembership" in ard_gm_check_out:
                     ard_user_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_manage', 'GroupMembership'], stdout=subprocess.PIPE)
                     ard_user_out, ard_user_err = ard_user_sp.communicate()
@@ -228,7 +232,7 @@ def ard_group_access_check():
             remote_group_check = subprocess.Popen(['dscl', '.', 'list', '/Groups'], stdout=subprocess.PIPE)
             remote_group_out, remote_group_err = remote_group_check.communicate()
             group_list = []
-            
+
             #Check if ard_interact is in the group list
             if "com.apple.local.ard_interact" in remote_group_out:
                 # If so read the group and check if there is a NestedGroups value
@@ -240,7 +244,7 @@ def ard_group_access_check():
                     group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_interact', 'NestedGroups'], stdout=subprocess.PIPE)
                     group_out, group_err = group_sp.communicate()
                     group_list_uuid = group_out.split()
-            
+
                     # Translate group UUIDs to gids
                     for group_uuid in group_list_uuid[1:]:
                         group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
@@ -248,7 +252,7 @@ def ard_group_access_check():
                         group_name = grp.getgrgid(group_id_out.split()[1]).gr_name
                         if group_name not in group_list:
                             group_list.append(group_name)
-                
+
             #Check if ard_admin is in the group list
             if "com.apple.local.ard_admin" in remote_group_out:
                 # If so read the group and check if there is a NestedGroups value
@@ -260,7 +264,7 @@ def ard_group_access_check():
                     group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_admin', 'NestedGroups'], stdout=subprocess.PIPE)
                     group_out, group_err = group_sp.communicate()
                     group_list_uuid = group_out.split()
-            
+
                     # Translate group UUIDs to gids
                     for group_uuid in group_list_uuid[1:]:
                         group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
@@ -282,7 +286,7 @@ def ard_group_access_check():
                     group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_manage', 'NestedGroups'], stdout=subprocess.PIPE)
                     group_out, group_err = group_sp.communicate()
                     group_list_uuid = group_out.split()
-            
+
                     # Translate group UUIDs to gids
                     for group_uuid in group_list_uuid[1:]:
                         group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
@@ -291,9 +295,9 @@ def ard_group_access_check():
                             group_name = grp.getgrgid(group_id_out.split()[1]).gr_name
                             if group_name not in group_list:
                                 group_list.append(group_name)
-            
+
             return ', '.join(item for item in group_list)
-                    
+
 #            return group_list
     else:
         # plist_path does not exist, which indicates that ARD is not enabled.
@@ -314,7 +318,7 @@ def firmware_pw_check():
             # so set the data to blank and print a warning.
             print "Error: firmwarepasswd binary not found or accessible."
             firmwarepw = ""
-        
+
     else:
         sp = subprocess.Popen(['nvram', 'security-mode'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         mode_out, mode_err = sp.communicate()
@@ -353,6 +357,25 @@ def skel_state_check():
         return 1 # if the OS is < 10.13, KEXT loading is open by default.
 
 
+def root_enabled_check():
+    """Checks to see if the root user is enabled or disabled."""
+    sp = subprocess.Popen(['/usr/bin/dscl', '-plist', '.', '-read', '/Users/root/'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = sp.communicate()
+
+    root_plist = FoundationPlist.readPlistFromString(out)
+
+    try:
+        if len(root_plist['dsAttrTypeStandard:Password']) > 1:
+            # several *s in output means password is set and account is enabled
+            return 1
+        else:
+            # a single * means the password is set but account is disabled
+            return 0
+    except KeyError:
+        # root pw has never been set, so it is disabled
+        return 0
+
+
 def main():
     """main"""
 
@@ -378,10 +401,11 @@ def main():
     result.update({'firmwarepw': firmware_pw_check()})
     result.update({'firewall_state':firewall_enable_check()})
     result.update({'skel_state':skel_state_check()})
+    result.update({'root_user':root_enabled_check()})
 
     # Write results of checks to cache file
     output_plist = os.path.join(cachedir, 'security.plist')
     FoundationPlist.writePlist(result, output_plist)
-    
+
 if __name__ == "__main__":
     main()

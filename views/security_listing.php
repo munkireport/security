@@ -34,7 +34,8 @@ new Security_model;
 		        <th data-i18n="security.ssh_groups" data-colname='security.ssh_groups'></th>
 		        <th data-i18n="security.ssh_users" data-colname='security.ssh_users'></th>
 		        <th data-i18n="security.ard_users" data-colname='security.ard_users'></th>
-		        <th data-i18n="security.ard_groups" data-colname='security.ard_groups'></th>
+                <th data-i18n="security.ard_groups" data-colname='security.ard_groups'></th>
+                <th data-i18n="security.root_user" data-colname='security.root_user'></th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -188,6 +189,17 @@ new Security_model;
                     return '<span class="label label-info">'+i18n.t('security.skel.user-approved')+'</span>';
                 }
                 // if skel_state is null, we don't have data
+                return '<span class="label label-default">'+i18n.t('unknown')+'</span>';
+            });
+
+            var root_user = $('td:eq(16)', nRow).html();
+            $('td:eq(16)', nRow).html(function(){
+                if(root_user == '1'){
+                    return '<span class="label label-danger">'+i18n.t('enabled')+'</span>';
+                } else if (root_user == '0'){
+                    return '<span class="label label-success">'+i18n.t('disabled')+'</span>';
+                }
+                // if root_user is null, we don't have data
                 return '<span class="label label-default">'+i18n.t('unknown')+'</span>';
             });
 
