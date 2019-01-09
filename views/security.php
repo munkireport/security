@@ -32,6 +32,8 @@
 
         <?php $widget->view($this, 'ssh_state'); ?>
 
+        <?php $widget->view($this, 'root_user'); ?>
+
     </div> <!-- /row -->
 
 
