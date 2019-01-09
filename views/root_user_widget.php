@@ -14,15 +14,15 @@
 				<div class="panel-body text-center">
 
 
-					<a id="rootuser-disabled" class="btn btn-danger hide">
-						<span class="rootuser-count bigger-150"></span><br>
-						<span class="rootuser-label"></span>
-						<span data-i18n="disabled"></span>
-					</a>
-					<a id="rootuser-enabled" class="btn btn-success hide">
+					<a id="rootuser-enabled" class="btn btn-danger hide">
 						<span class="rootuser-count bigger-150"></span><br>
 						<span class="rootuser-label"></span>
 						<span data-i18n="enabled"></span>
+					</a>
+					<a id="rootuser-disabled" class="btn btn-success hide">
+						<span class="rootuser-count bigger-150"></span><br>
+						<span class="rootuser-label"></span>
+						<span data-i18n="disabled"></span>
 					</a>
 
           <span id="rootuser-nodata" data-i18n="no_clients"></span>
