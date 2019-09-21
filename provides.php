@@ -1,6 +1,9 @@
 <?php
 
 return array(
+    'detail_widgets' => [
+        'securtity_detail' => ['view' => 'security_detail_widget'],
+    ],
     'listings' => array(
         'security' => array('view' => 'security_listing', 'i18n' => 'security.security'),
     ),
