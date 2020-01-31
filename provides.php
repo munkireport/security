@@ -14,7 +14,9 @@ return array(
         'firewall_state' => array('view' => 'firewall_state_widget'),
         'skel_state' => array('view' => 'skel_state_widget'),
         'root_user' => array('view' => 'root_user_widget'),
-	'ssh_state' => array('view' => 'ssh_state_widget'),
+	    'ssh_state' => array('view' => 'ssh_state_widget'),
+	    't2_externalboot' => array('view' => 't2_externalboot_widget'),
+	    't2_secureboot' => array('view' => 't2_secureboot_widget'),
     ),
     'reports' => array(
         'security' => array('view' => 'security', 'i18n' => 'security.report'),

@@ -210,5 +210,51 @@ class Security_controller extends Module_controller
         $obj->view('json', array('msg' => $out));
     }
 
+    /**
+     * Get secure boot statistics
+     *
+     * @return void
+     * @author eholtam
+     **/
+    public function get_secureboot_stats()
+    {
+        $obj = new View();
+
+        if (! $this->authorized()) {
+            $obj->view('json', array('msg' => array('error' => 'Not authenticated')));
+            return;
+        }
+                $secureboot_report = new Security_model;
+
+                $out = array();
+                $out['stats'] = $secureboot_report->get_secureboot_stats();
+
+
+        $obj->view('json', array('msg' => $out));
+    }
+
+    /**
+     * Get external boot statistics
+     *
+     * @return void
+     * @author eholtam
+     **/
+    public function get_externalboot_stats()
+    {
+        $obj = new View();
+
+        if (! $this->authorized()) {
+            $obj->view('json', array('msg' => array('error' => 'Not authenticated')));
+            return;
+        }
+                $externalboot_report = new Security_model;
+
+                $out = array();
+                $out['stats'] = $externalboot_report->get_externalboot_stats();
+
+
+        $obj->view('json', array('msg' => $out));
+    }
+
 
 } // END class default_module
