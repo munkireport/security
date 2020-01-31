@@ -28,6 +28,55 @@ def gatekeeper_check():
     else:
         return "Not Supported"
 
+def t2_chip_check():
+    """ Checks if T2 chip is present."""
+
+    sp = subprocess.Popen(['system_profiler', 'SPiBridgeDataType'], stdout=subprocess.PIPE)
+    out, err = sp.communicate()
+    if "Apple T2" in out:
+        return True
+    else:
+        return False
+
+def t2_secureboot_check():
+    """ Checks Secure Boot settings from nvram.  T2 chip models only. """
+
+    if t2_chip_check():
+        sp = subprocess.Popen(['nvram', '94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy'], stdout=subprocess.PIPE)
+        out, err = sp.communicate()
+        out_value = out.split("\t")[1].rstrip() 
+
+        if "%02" in out_value:
+            secureboot_value = "SECUREBOOT_FULL"
+        elif "%01" in out_value:
+            secureboot_value = "SECUREBOOT_MEDIUM"
+        elif "%00" in out_value:
+            secureboot_value = "SECUREBOOT_OFF"
+        else:
+            secureboot_value = "SECUREBOOT_UNKNOWN"           
+    else:
+        secureboot_value = "SECUREBOOT_UNSUPPORTED"
+
+    return secureboot_value
+
+def t2_externalboot_check():
+    """ Checks External Boot settings from nvram.  T2 chip models only. """
+
+    if t2_chip_check():
+        sp = subprocess.Popen(['nvram', '5eeb160f-45fb-4ce9-b4e3-610359abf6f8:StartupManagerPolicy'], stdout=subprocess.PIPE)
+        out, err = sp.communicate()
+        out_value = out.split("\t")[1].rstrip()
+        
+        if "%03" in out_value:
+            externalboot_value = "EXTERNALBOOT_ON"
+        elif "%00" in out_value:
+            externalboot_value = "EXTERNALBOOT_OFF"
+        else:
+            externalboot_value = "EXTERNALBOOT_UNKNOWN"           
+    else:
+        externalboot_value = "EXTERNALBOOT_UNSUPPORTED"
+    
+    return externalboot_value
 
 def sip_check():
     """ SIP checks. We need to be running 10.11 or newer."""
@@ -402,6 +451,9 @@ def main():
     result.update({'firewall_state':firewall_enable_check()})
     result.update({'skel_state':skel_state_check()})
     result.update({'root_user':root_enabled_check()})
+    result.update({'t2_secureboot': t2_secureboot_check()})
+    result.update({'t2_externalboot': t2_externalboot_check()})
+    
 
     # Write results of checks to cache file
     output_plist = os.path.join(cachedir, 'security.plist')
