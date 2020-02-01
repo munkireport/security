@@ -45,8 +45,8 @@ $(document).on('appUpdate', function(e, lang) {
 
 	// Set URLs. TODO - once filtered update this to deep link
 	var url = appUrl + '/show/listing/security/security'
-	$('#t2_externalboot-On').attr('href', url)
-	$('#t2_externalboot-Off').attr('href', url)
+	$('#t2_externalboot-externalbooton').attr('href', url)
+	$('#t2_externalboot-externalbootoff').attr('href', url)
 
         // Show no clients span
         $('#t2_externalboot-nodata').removeClass('hide');
