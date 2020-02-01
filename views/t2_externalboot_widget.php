@@ -14,12 +14,12 @@
 				<div class="panel-body text-center">
 
 
-					<a id="t2_externalboot-On" class="btn btn-warning hide">
+					<a id="t2_externalboot-externalbooton" class="btn btn-warning hide">
 						<span class="t2_externalboot-count bigger-150"></span><br>
 						<span class="t2_externalboot-label"></span>
 						<span data-i18n="security.off"></span>
 					</a>
-					<a id="t2_externalboot-Off" class="btn btn-success hide">
+					<a id="t2_externalboot-externalbootoff" class="btn btn-success hide">
 						<span class="t2_externalboot-count bigger-150"></span><br>
 						<span class="t2_externalboot-label"></span>
 						<span data-i18n="security.on"></span>
