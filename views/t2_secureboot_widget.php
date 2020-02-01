@@ -4,7 +4,7 @@
 
 				<div class="panel-heading">
 
-					<h3 class="panel-title"><i class="fa fa-lock"></i>
+					<h3 class="panel-title"><i class="fa fa-shield"></i>
 					    <span data-i18n="security.t2_secureboot"></span>
 					    <list-link data-url="/show/listing/security/security"></list-link>
 					</h3>

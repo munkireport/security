@@ -197,6 +197,30 @@
                 return '<span class="label label-default">'+i18n.t('unknown')+'</span>';
             });
 
+            var secure_boot = $('td:eq(17)', nRow).html();
+            $('td:eq(17)', nRow).html(function(){
+                if(secure_boot == 'SECUREBOOT_FULL'){
+                    return '<span class="label label-success">'+i18n.t('security.full')+'</span>';
+                } else if (secure_boot == 'SECUREBOOT_MEDIUM'){
+                    return '<span class="label label-warning">'+i18n.t('security.medium')+'</span>';
+                } else if (secure_boot == 'SECUREBOOT_OFF'){
+                    return '<span class="label label-warning">'+i18n.t('security.off')+'</span>';
+                }
+                // if root_user is null, we don't have data
+                return '<span class="label label-default">'+i18n.t('unknown')+'</span>';
+            });
+
+            var external_boot = $('td:eq(18)', nRow).html();
+            $('td:eq(18)', nRow).html(function(){
+                if(external_boot == 'EXTERNALBOOT_ON'){
+                    return '<span class="label label-success">'+i18n.t('security.on')+'</span>';
+                } else if (external_boot == 'EXTERNALBOOT_OFF'){
+                    return '<span class="label label-warning">'+i18n.t('security.off')+'</span>';
+                }
+                // if root_user is null, we don't have data
+                return '<span class="label label-default">'+i18n.t('unknown')+'</span>';
+            });
+
         }
     });
   });
