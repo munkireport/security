@@ -50,9 +50,9 @@ $(document).on('appUpdate', function(e, lang) {
 
 	// Set URLs. TODO - once filtered update this to deep link
 	var url = appUrl + '/show/listing/security/security'
-	$('#SECUREBOOT_OFF').attr('href', url)
-	$('#SECUREBOOT_MEDIUM').attr('href', url)
-	$('#SECUREBOOT_FULL').attr('href', url)
+	$('#t2_secureboot-Off').attr('href', url)
+	$('#t2_secureboot-Medium').attr('href', url)
+	$('#t2_secureboot-Full').attr('href', url)
 
         // Show no clients span
         $('#t2_secureboot-nodata').removeClass('hide');
