@@ -13,7 +13,9 @@ class SecurityAddSecurebootExternalboot extends Migration
         $capsule::schema()->table($this->tableName, function (Blueprint $table) {
           $table->string('t2_secureboot')->default('')->nullable();
           $table->string('t2_externalboot')->default('')->nullable();
-          $table->index('t2_secureboot', 't2_externalboot');
+          $table->index('t2_secureboot');
+          $table->index('t2_externalboot');
+          
         });
     }
     
