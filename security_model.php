@@ -148,9 +148,9 @@ class Security_model extends \Model
     public function get_externalboot_stats()
     {
 	$sql = "SELECT COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_ON' THEN 1 END) AS externalbooton,
-		SELECT COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_OFF' THEN 1 END) AS externalbootoff,
-		SELECT COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_UNKNOWN' THEN 1 END) AS externalbootunknown,
-		SELECT COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_UNSUPPORTED' THEN 1 END) AS externalbootunsupported
+		COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_OFF' THEN 1 END) AS externalbootoff,
+		COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_UNKNOWN' THEN 1 END) AS externalbootunknown,
+		COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_UNSUPPORTED' THEN 1 END) AS externalbootunsupported
 		FROM security
 		LEFT JOIN reportdata USING(serial_number)
 		".get_machine_group_filter();

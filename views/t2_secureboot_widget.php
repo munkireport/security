@@ -14,12 +14,12 @@
 				<div class="panel-body text-center">
 
 
-					<a id="t2_secureboot-securebootoff" class="btn btn-warning hide">
+					<a id="t2_secureboot-securebootoff" class="btn btn-danger hide">
 						<span class="t2_secureboot-count bigger-150"></span><br>
 						<span class="t2_secureboot-label"></span>
 						<span data-i18n="security.off"></span>
 					</a>
-					<a id="t2_secureboot-securebootmedium" class="btn btn-info hide">
+					<a id="t2_secureboot-securebootmedium" class="btn btn-warning hide">
 						<span class="t2_secureboot-count bigger-150"></span><br>
 						<span class="t2_secureboot-label"></span>
 						<span data-i18n="security.medium"></span>
