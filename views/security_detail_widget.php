@@ -68,6 +68,9 @@ $(document).on('appReady', function(){
                             if(item.t2_secureboot == 'SECUREBOOT_FULL'){
                             return i18n.t('security.full');
                             }
+                            if(item.t2_secureboot == 'SECUREBOOT_UNSUPPORTED'){
+                            return i18n.t('security.unsupported');
+                            }
                         })))
                 .append($('<tr>')
                     .append($('<th>')
@@ -80,7 +83,10 @@ $(document).on('appReady', function(){
                             if(item.t2_externalboot == 'EXTERNALBOOT_ON'){
                                 return i18n.t('security.on');
                             }
-                        })))
+                             if(item.t2_externalboot == 'EXTERNALBOOT_UNSUPPORTED'){
+                                return i18n.t('security.unsupported');
+                            }
+                       })))
 		});
     });
 });
