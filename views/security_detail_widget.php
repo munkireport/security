@@ -58,12 +58,29 @@ $(document).on('appReady', function(){
                     .append($('<th>')
                         .text(i18n.t('security.t2_secureboot')))
                     .append($('<td>')
-                        .text(item.t2_secureboot)))
+                        .text(function(){
+                            if(item.t2_secureboot == 'SECUREBOOT_OFF'){
+                                return i18n.t('security.off');
+                            }
+                            if(item.t2_secureboot == 'SECUREBOOT_MEDIUM'){
+                            return i18n.t('security.medium');
+                            }
+                            if(item.t2_secureboot == 'SECUREBOOT_FULL'){
+                            return i18n.t('security.full');
+                            }
+                        })))
                 .append($('<tr>')
                     .append($('<th>')
                         .text(i18n.t('security.t2_externalboot')))
                     .append($('<td>')
-                        .text(item.t2_externalboot)));
+                        .text(function(){
+                            if(item.t2_externalboot == 'EXTERNALBOOT_OFF'){
+                                return i18n.t('security.off');
+                            }
+                            if(item.t2_externalboot == 'EXTERNALBOOT_ON'){
+                                return i18n.t('security.on');
+                            }
+                        })))
 		});
     });
 });
