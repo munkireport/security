@@ -19,6 +19,8 @@ class Security_model extends \Model
         $this->rs['firewall_state'] = '';
         $this->rs['skel_state'] = '';
         $this->rs['root_user'] = '';
+        $this->rs['t2_secureboot'] = '';
+        $this->rs['t2_externalboot'] = '';
 
         if ($serial) {
             $this->retrieve_record($serial);
@@ -48,7 +50,7 @@ class Security_model extends \Model
 
     		$plist = $parser->toArray();
 
-    		foreach (array('sip', 'gatekeeper', 'ssh_groups', 'ssh_users', 'ard_groups', 'ard_users', 'firmwarepw', 'firewall_state', 'skel_state', 'root_user') as $item) {
+    		foreach (array('sip', 'gatekeeper', 'ssh_groups', 'ssh_users', 'ard_groups', 'ard_users', 'firmwarepw', 'firewall_state', 'skel_state', 'root_user', 't2_secureboot', 't2_externalboot') as $item) {
     			if (isset($plist[$item])) {
     				$this->$item = $plist[$item];
     			} else {
@@ -128,6 +130,31 @@ class Security_model extends \Model
                 LEFT JOIN reportdata USING(serial_number)
             ".get_machine_group_filter();
     return current($this->query($sql));
+    }
+
+    public function get_secureboot_stats()
+    {
+	$sql = "SELECT COUNT(CASE WHEN t2_secureboot = 'SECUREBOOT_FULL' THEN 1 END) AS securebootfull,
+		COUNT(CASE WHEN t2_secureboot = 'SECUREBOOT_MEDIUM' THEN 1 END) AS securebootmedium,
+		COUNT(CASE WHEN t2_secureboot = 'SECUREBOOT_OFF' THEN 1 END) AS securebootoff,
+		COUNT(CASE WHEN t2_secureboot = 'SECUREBOOT_UNKNOWN' THEN 1 END) AS securebootunknown,
+		COUNT(CASE WHEN t2_secureboot = 'SECUREBOOT_UNSUPPORTED' THEN 1 END) AS securebootunsupported
+		FROM security
+		LEFT JOIN reportdata USING(serial_number)
+		".get_machine_group_filter();
+	return current($this->query($sql));
+    }
+
+    public function get_externalboot_stats()
+    {
+	$sql = "SELECT COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_ON' THEN 1 END) AS externalbooton,
+		COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_OFF' THEN 1 END) AS externalbootoff,
+		COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_UNKNOWN' THEN 1 END) AS externalbootunknown,
+		COUNT(CASE WHEN t2_externalboot = 'EXTERNALBOOT_UNSUPPORTED' THEN 1 END) AS externalbootunsupported
+		FROM security
+		LEFT JOIN reportdata USING(serial_number)
+		".get_machine_group_filter();
+	return current($this->query($sql));
     }
 
 }
