@@ -168,7 +168,7 @@ def ssh_group_access_check():
         if "com.apple.access_ssh-disabled" in out:
             # if this group exists, all users are permitted to access SSH.
             # Nothing group specific
-            pass
+            return ''
 
         elif "com.apple.access_ssh" in out:
             # Get a list of UUIDs of Nested Groups
@@ -192,7 +192,7 @@ def ssh_group_access_check():
             # If neither SSH group exists but SSH is enabled, it was turned on with
             # systemsetup and all users are enabled.
             # Nothing group specific
-            pass
+            return ''
 
 def ard_access_check():
     """Check for local users who have ARD permissions
