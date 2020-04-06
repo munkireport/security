@@ -47,12 +47,12 @@ $(document).on('appReady', function(){
                 .append($('<tr>')
                     .append($('<th>')
                         .text(i18n.t('security.firewall_state')))
-                    .append($('<td>')
+                    .append($('<td class="mr-firewall_state">')
                         .text(item.firewall_state)))
                 .append($('<tr>')
                     .append($('<th>')
                         .text(i18n.t('security.skel.kext-loading')))
-                    .append($('<td>')
+                    .append($('<td class="mr-skel_state">')
                         .text(item.skel_state)))
                 .append($('<tr>')
                     .append($('<th>')
@@ -87,7 +87,19 @@ $(document).on('appReady', function(){
                                 return i18n.t('security.unsupported');
                             }
                        })))
-		});
+            // Firewall
+            var fw_states = [i18n.t('disabled'), i18n.t('enabled'), i18n.t('security.block_all')]
+            var firewall_state = parseInt(item.firewall_state);
+            $('.mr-firewall_state').text(fw_states[firewall_state] || i18n.t('unknown'));
+                       
+            // SKEL status
+            var skel_states = [i18n.t('security.skel.all-allowed'), i18n.t('security.skel.user-approved')]
+            var skel_state = parseInt(item.skel_state);
+            $('.mr-skel_state').text(skel_states[skel_state] || i18n.t('unknown'));
+
+        });
+        
+
     });
 });
 </script>
