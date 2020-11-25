@@ -153,6 +153,8 @@
                          return '<span class="label label-success">'+i18n.t('enabled')+'</span>';
                      } else if ( firmwarepw == 'No'){
                          return '<span class="label label-danger">'+i18n.t('disabled')+'</span>';
+                     } else if ( firmwarepw == 'Not Supported'){
+                     return '<span class="label label-info">'+i18n.t('unsupported')+'</span>';
                      }
                      return '<span class="label label-default">'+i18n.t('unknown')+'</span>';
                  });
