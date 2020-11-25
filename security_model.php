@@ -82,7 +82,8 @@ class Security_model extends \Model
     public function get_firmwarepw_stats()
     {
 	$sql = "SELECT COUNT(CASE WHEN firmwarepw = 'Yes' THEN 1 END) AS enabled,
-		COUNT(CASE WHEN firmwarepw = 'No' THEN 1 END) AS disabled
+        COUNT(CASE WHEN firmwarepw = 'No' THEN 1 END) AS disabled,
+        COUNT(CASE WHEN firmwarepw = 'Not Supported' THEN 1 END) as notsupported
 		FROM security
 		LEFT JOIN reportdata USING(serial_number)
 		".get_machine_group_filter();
