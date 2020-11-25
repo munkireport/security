@@ -36,6 +36,14 @@
 
     </div> <!-- /row -->
 
+    <div class="row">
+
+        <?php $widget->view($this, 't2_secureboot'); ?>
+
+        <?php $widget->view($this, 't2_externalboot'); ?>
+
+    </div> <!-- /row -->
+
 
 </div>  <!-- /container -->
 

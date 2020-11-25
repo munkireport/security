@@ -4,9 +4,13 @@
     "block_all": "Block All",
     "firewall_state": "Firewall State",
     "firmwarepw": "Firmware Password",
+    "full": "Full",
     "gatekeeper": "Gatekeeper Status",
     "gatekeeper_active": "Gatekeeper Active",
     "gatekeeper_disabled": "Gatekeeper Disabled",
+    "medium": "Medium",
+    "off": "Off",
+    "on": "On",
     "report": "Security Report",
     "root_user": "Root User",
     "root_user_status": "Root User Status",
@@ -22,5 +26,9 @@
         "kext-loading": "KEXT Loading",
         "all-approved": "Open",
         "user-approved": "User Approved"
-    }
+    },
+    "t2_secureboot": "Secure Boot",
+    "t2_externalboot": "External Boot",
+    "unknown": "Unknown",
+    "unsupported": "Unsupported"
 }
