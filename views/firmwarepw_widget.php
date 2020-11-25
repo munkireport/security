@@ -23,7 +23,12 @@
 						<span class="firmwarepw-count bigger-150"></span><br>
 						<span class="firmwarepw-label"></span>
 						<span data-i18n="enabled"></span>
-					</a>
+                    </a>
+                    <a id="firmwarepw-notsupported" class="btn btn-info hide">
+                        <span class="firmwarepw-count bigger-150"></span><br>
+                        <span class=firmwarepw-label"></span>
+                        <span data-i18n="unsupported"></span>
+                    </a>
 
           <span id="firmwarepw-nodata" data-i18n="no_clients"></span>
 
@@ -46,7 +51,8 @@ $(document).on('appUpdate', function(e, lang) {
 	// Set URLs. TODO - once filtered update this to deep link
 	var url = appUrl + '/show/listing/security/security'
 	$('#firmwarepw-disabled').attr('href', url)
-	$('#firmwarepw-enabled').attr('href', url)
+    $('#firmwarepw-enabled').attr('href', url)
+    $('#firmwarepw-notsupported').attr('href', url)
 
         // Show no clients span
         $('#firmwarepw-nodata').removeClass('hide');

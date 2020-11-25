@@ -20,7 +20,7 @@ def gatekeeper_check():
     """ Gatekeeper checks. Simply calls the spctl and parses status. Requires 10.7+"""
 
     if float(os.uname()[2][0:2]) >= 11:
-        sp = subprocess.Popen(['spctl', '--status'], stdout=subprocess.PIPE)
+        sp = subprocess.Popen(['spctl', '--status'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = sp.communicate()
         if "enabled" in out:
             return "Active"
@@ -364,6 +364,12 @@ def firmware_pw_check():
     """Checks to see if a firmware password is set.
     The command firmwarepassword appeared in 10.10, so we use nvram for older versions.
     Thank you @steffan for this check."""
+    # Firmware passwords not supported on Apple Silicon - return No if we are running it
+    sp = subprocess.Popen(['/usr/bin/arch'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = sp.communicate()
+    if 'arm64' in out:
+        return "Not Supported"
+
     if float(os.uname()[2][0:2]) >= 14:
         try:
             sp = subprocess.Popen(['/usr/sbin/firmwarepasswd', '-check'], stdout=subprocess.PIPE)
@@ -402,7 +408,7 @@ def skel_state_check():
     Only supported with macOS High Sierra (10.13 / 17) and up."""
 
     if float(os.uname()[2][0:2]) >= 17:
-        sp = subprocess.Popen(['spctl', 'kext-consent', 'status'], stdout=subprocess.PIPE)
+        sp = subprocess.Popen(['spctl', 'kext-consent', 'status'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = sp.communicate()
 
         if "ENABLED" in out:
