@@ -186,7 +186,7 @@ class Security_controller extends Module_controller
     }
 
     /**
-     * Get SSH statistics
+     * Get Root User statistics
      *
      * @return void
      * @author rickheil
