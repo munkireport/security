@@ -293,18 +293,24 @@ def ard_group_access_check():
                 ard_ng_check_out, ard_ng_check_err = ard_ng_check.communicate()
 
                 if "NestedGroups" in ard_ng_check_out:
-                    # Get a list of UUIDs of Nested Groups
-                    group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_interact', 'NestedGroups'], stdout=subprocess.PIPE)
-                    group_out, group_err = group_sp.communicate()
-                    group_list_uuid = group_out.split()
+                    try:
+                        # Get a list of UUIDs of Nested Groups
+                        group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_interact', 'NestedGroups'], stdout=subprocess.PIPE)
+                        group_out, group_err = group_sp.communicate()
+                        group_list_uuid = group_out.split()
 
-                    # Translate group UUIDs to gids
-                    for group_uuid in group_list_uuid[1:]:
-                        group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
-                        group_id_out, group_id_err = group_id_sp.communicate()
-                        group_name = grp.getgrgid(group_id_out.split()[1]).gr_name
-                        if group_name not in group_list:
-                            group_list.append(group_name)
+                        # Translate group UUIDs to gids
+                        try:
+                            for group_uuid in group_list_uuid[1:]:
+                                group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
+                                group_id_out, group_id_err = group_id_sp.communicate()
+                                group_name = grp.getgrgid(group_id_out.split()[1]).gr_name
+                                if group_name not in group_list:
+                                    group_list.append(group_name)
+                        except IndexError:
+                            pass
+                    except:
+                        pass
 
             #Check if ard_admin is in the group list
             if "com.apple.local.ard_admin" in remote_group_out:
@@ -313,20 +319,26 @@ def ard_group_access_check():
                 ard_ng_check_out, ard_ng_check_err = ard_ng_check.communicate()
 
                 if "NestedGroups" in ard_ng_check_out:
-                    # Get a list of UUIDs of Nested Groups
-                    group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_admin', 'NestedGroups'], stdout=subprocess.PIPE)
-                    group_out, group_err = group_sp.communicate()
-                    group_list_uuid = group_out.split()
+                    try:
+                        # Get a list of UUIDs of Nested Groups
+                        group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_admin', 'NestedGroups'], stdout=subprocess.PIPE)
+                        group_out, group_err = group_sp.communicate()
+                        group_list_uuid = group_out.split()
 
-                    # Translate group UUIDs to gids
-                    for group_uuid in group_list_uuid[1:]:
-                        group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
-                        group_id_out, group_id_err = group_id_sp.communicate()
-                        if group_id_sp.returncode == 0:
-                            ard_group = grp.getgrgid(group_id_out.split()[1]).gr_name
-                            group_name = grp.getgrgid(group_id_out.split()[1]).gr_name
-                            if group_name not in group_list:
-                                group_list.append(group_name)
+                        # Translate group UUIDs to gids
+                        try:
+                            for group_uuid in group_list_uuid[1:]:
+                                group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
+                                group_id_out, group_id_err = group_id_sp.communicate()
+                                if group_id_sp.returncode == 0:
+                                    ard_group = grp.getgrgid(group_id_out.split()[1]).gr_name
+                                    group_name = grp.getgrgid(group_id_out.split()[1]).gr_name
+                                    if group_name not in group_list:
+                                        group_list.append(group_name)
+                        except IndexError:
+                            pass
+                    except:
+                        pass
 
             #Check if ard_manage is in the group list
             if "com.apple.local.ard_manage" in remote_group_out:
@@ -335,21 +347,24 @@ def ard_group_access_check():
                 ard_ng_check_out, ard_ng_check_err = ard_ng_check.communicate()
 
                 if "NestedGroups" in ard_ng_check_out:
-                    # Get a list of UUIDs of Nested Groups
-                    group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_manage', 'NestedGroups'], stdout=subprocess.PIPE)
-                    group_out, group_err = group_sp.communicate()
-                    group_list_uuid = group_out.split()
-
-                    # Translate group UUIDs to gids
                     try:
-                        for group_uuid in group_list_uuid[1:]:
-                            group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
-                            group_id_out, group_id_err = group_id_sp.communicate()
-                            if group_id_sp.returncode == 0:
-                                group_name = grp.getgrgid(group_id_out.split()[1]).gr_name
-                                if group_name not in group_list:
-                                    group_list.append(group_name)
-                    except IndexError:
+                        # Get a list of UUIDs of Nested Groups
+                        group_sp = subprocess.Popen(['dscl', '.', 'read', '/Groups/com.apple.local.ard_manage', 'NestedGroups'], stdout=subprocess.PIPE)
+                        group_out, group_err = group_sp.communicate()
+                        group_list_uuid = group_out.split()
+
+                        # Translate group UUIDs to gids
+                        try:
+                            for group_uuid in group_list_uuid[1:]:
+                                group_id_sp = subprocess.Popen(['dsmemberutil', 'getid', '-x', group_uuid], stdout=subprocess.PIPE)
+                                group_id_out, group_id_err = group_id_sp.communicate()
+                                if group_id_sp.returncode == 0:
+                                    group_name = grp.getgrgid(group_id_out.split()[1]).gr_name
+                                    if group_name not in group_list:
+                                        group_list.append(group_name)
+                        except IndexError:
+                            pass
+                    except:
                         pass
                         
             return ', '.join(item for item in group_list)
