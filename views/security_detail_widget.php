@@ -89,10 +89,17 @@ $(document).on('appReady', function(){
                        })))
                 .append($('<tr>')
                     .append($('<th>')
-                        .text(i18n.t('security.activation_lock')))
+                        .text(i18n.t('security.activation_lock_status')))
                     .append($('<td class="mr-activation_lock">')
-                        .text(item.activation_lock)))
-                       
+                        .text(function(){
+                            if(item.activation_lock == 'activation_lock_enabled'){
+                                return i18n.t('enabled');
+                            }
+                            if(item.activation_lock == 'activation_lock_disabled'){
+                                return i18n.t('disabled');
+                            }
+                        })))
+                        
             // Firewall
             var fw_states = [i18n.t('disabled'), i18n.t('enabled'), i18n.t('security.block_all')]
             var firewall_state = parseInt(item.firewall_state);

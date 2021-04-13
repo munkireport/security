@@ -25,7 +25,7 @@
 		        <th data-i18n="security.root_user" data-colname='security.root_user'></th>
 		        <th data-i18n="security.t2_secureboot" data-colname='security.t2_secureboot'></th>
 		        <th data-i18n="security.t2_externalboot" data-colname='security.t2_externalboot'></th>
-		        <th data-i18n="security.activation_lock" data-colname='security.activation_lock_status'></th>
+		        <th data-i18n="security.activation_lock_status" data-colname='security.activation_lock'></th>
 		      </tr>
 		    </thead>
 		    <tbody>

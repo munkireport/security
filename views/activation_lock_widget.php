@@ -5,7 +5,7 @@
 				<div class="panel-heading">
 
 					<h3 class="panel-title"><i class="fa fa-lock"></i>
-					    <span data-i18n="security.activation_lock"></span>
+					    <span data-i18n="security.activation_lock_status"></span>
 					    <list-link data-url="/show/listing/security/security"></list-link>
 					</h3>
 
@@ -14,12 +14,12 @@
 				<div class="panel-body text-center">
 
 
-					<a id="activation_lock_enabled" class="btn btn-danger hide">
+					<a id="activation_lock-Enabled" class="btn btn-danger hide">
 						<span class="activation_lock-count bigger-150"></span><br>
 						<span class="activation_lock-label"></span>
 						<span data-i18n="enabled"></span>
 					</a>
-					<a id="activation_lock_disabled" class="btn btn-success hide">
+					<a id="activation_lock-Disabled" class="btn btn-success hide">
 						<span class="activation_lock-count bigger-150"></span><br>
 						<span class="activation_lock-label"></span>
 						<span data-i18n="disabled"></span>
@@ -45,8 +45,8 @@ $(document).on('appUpdate', function(e, lang) {
 
 	// Set URLs. TODO - once filtered update this to deep link
 	var url = appUrl + '/show/listing/security/security'
-	$('#activation_lock_enabled').attr('href', url + "#activation_lock_enabled")
-	$('#activation_lock_disabled').attr('href', url + "#activation_lock_disabled")
+	$('#activation_lock-Enabled').attr('href', url + "#activation_lock_enabled")
+	$('#activation_lock-Disabled').attr('href', url + "#activation_lock_disabled")
 
         // Show no clients span
         $('#activation_lock-nodata').removeClass('hide');
