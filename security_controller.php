@@ -46,6 +46,30 @@ class Security_controller extends Module_controller
     }
 
     /**
+     * Get Activation Lock statistics
+     *
+     * @return void
+     * @author eholtam
+     **/
+    public function get_activation_lock_stats()
+    {
+        $obj = new View();
+
+        if (! $this->authorized()) {
+            $obj->view('json', array('msg' => array('error' => 'Not authenticated')));
+            return;
+        }
+                $activation_lock_report = new Security_model;
+
+                $out = array();
+                $out['stats'] = $activation_lock_report->get_activation_lock_stats();
+
+
+        $obj->view('json', array('msg' => $out));
+    }    
+
+
+    /**
      * Get SIP statistics
      *
      * @return void

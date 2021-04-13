@@ -25,6 +25,7 @@
 		        <th data-i18n="security.root_user" data-colname='security.root_user'></th>
 		        <th data-i18n="security.t2_secureboot" data-colname='security.t2_secureboot'></th>
 		        <th data-i18n="security.t2_externalboot" data-colname='security.t2_externalboot'></th>
+		        <th data-i18n="security.activation_lock_status" data-colname='security.activation_lock'></th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -217,6 +218,19 @@
                     } else if (external_boot == 'EXTERNALBOOT_OFF'){
                         return '<span class="label label-success">'+i18n.t('security.off')+'</span>';
                     } else if (external_boot == 'EXTERNALBOOT_UNSUPPORTED'){
+                        return '<span class="label label-info">'+i18n.t('security.unsupported')+'</span>';
+                    }
+                    // if root_user is null, we don't have data
+                    return '<span class="label label-default">'+i18n.t('unknown')+'</span>';
+                });
+
+                var activation_lock = $('td:eq(18)', nRow).html();
+                $('td:eq(18)', nRow).html(function(){
+                    if(activation_lock == 'activation_lock_enabled'){
+                        return '<span class="label label-danger">'+i18n.t('enabled')+'</span>';
+                    } else if (activation_lock == 'activation_lock_disabled'){
+                        return '<span class="label label-success">'+i18n.t('disabled')+'</span>';
+                    } else if (activation_lock == 'not_supported'){
                         return '<span class="label label-info">'+i18n.t('security.unsupported')+'</span>';
                     }
                     // if root_user is null, we don't have data

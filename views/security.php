@@ -41,6 +41,8 @@
         <?php $widget->view($this, 't2_secureboot'); ?>
 
         <?php $widget->view($this, 't2_externalboot'); ?>
+        
+        <?php $widget->view($this, 'activation_lock'); ?>
 
     </div> <!-- /row -->
 

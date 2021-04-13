@@ -20,7 +20,8 @@ class Security_model extends \Model
         $this->rs['skel_state'] = '';
         $this->rs['root_user'] = '';
         $this->rs['t2_secureboot'] = '';
-        $this->rs['t2_externalboot'] = '';
+        $this->rs['t2_externalboot'] = '';        
+        $this->rs['activation_lock'] = '';
 
         if ($serial) {
             $this->retrieve_record($serial);
@@ -50,7 +51,7 @@ class Security_model extends \Model
 
     		$plist = $parser->toArray();
 
-    		foreach (array('sip', 'gatekeeper', 'ssh_groups', 'ssh_users', 'ard_groups', 'ard_users', 'firmwarepw', 'firewall_state', 'skel_state', 'root_user', 't2_secureboot', 't2_externalboot') as $item) {
+    		foreach (array('activation_lock', 'sip', 'gatekeeper', 'ssh_groups', 'ssh_users', 'ard_groups', 'ard_users', 'firmwarepw', 'firewall_state', 'skel_state', 'root_user', 't2_secureboot', 't2_externalboot') as $item) {
     			if (isset($plist[$item])) {
     				$this->$item = $plist[$item];
     			} else {
@@ -59,6 +60,17 @@ class Security_model extends \Model
     		}
     		$this->save();
     	}
+    }
+
+    public function get_activation_lock_stats()
+    {
+	$sql = "SELECT COUNT(CASE WHEN activation_lock = 'activation_lock_enabled' THEN 1 END) AS Enabled,
+		COUNT(CASE WHEN activation_lock = 'activation_lock_disabled' THEN 1 END) AS Disabled,
+		COUNT(CASE WHEN activation_lock = 'not_supported' THEN 1 END) as Notsupported
+		FROM security
+		LEFT JOIN reportdata USING(serial_number)
+		".get_machine_group_filter();
+	return current($this->query($sql));
     }
 
     public function get_sip_stats()

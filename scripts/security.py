@@ -7,6 +7,7 @@ import os
 import sys
 import subprocess
 import grp
+import plistlib
 sys.path.insert(0, '/usr/local/munki')
 sys.path.insert(0, '/usr/local/munkireport')
 
@@ -28,6 +29,31 @@ def gatekeeper_check():
             return "Disabled"
     else:
         return "Not Supported"
+
+
+def activation_lock_check():
+    """ Checks if Activation Lock is enabled."""
+
+    try:
+        cmd = ['/usr/sbin/system_profiler', 'SPHardwareDataType', '-xml']
+        proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
+                                stdin=subprocess.PIPE,
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        (output, unused_error) = proc.communicate()
+
+
+        plist = plistlib.readPlistFromString(output)
+        # system_profiler xml is an array
+        sp_dict = plist[0]
+        items = sp_dict['_items']
+        for item in items:
+            for key in item:
+                if key == "activation_lock_status":
+                     return item[key]
+            return "not_supported" 
+    except Exception:
+        return "not_supported"
+
 
 def t2_chip_check():
     """ Checks if T2 chip is present."""
@@ -466,6 +492,7 @@ def main():
     result.update({'root_user':root_enabled_check()})
     result.update({'t2_secureboot': t2_secureboot_check()})
     result.update({'t2_externalboot': t2_externalboot_check()})
+    result.update({'activation_lock': activation_lock_check()})
     
 
     # Write results of checks to cache file

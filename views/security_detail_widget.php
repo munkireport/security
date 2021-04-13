@@ -87,6 +87,22 @@ $(document).on('appReady', function(){
                                 return i18n.t('security.unsupported');
                             }
                        })))
+                .append($('<tr>')
+                    .append($('<th>')
+                        .text(i18n.t('security.activation_lock_status')))
+                    .append($('<td class="mr-activation_lock">')
+                        .text(function(){
+                            if(item.activation_lock == 'activation_lock_enabled'){
+                                return i18n.t('enabled');
+                            }
+                            if(item.activation_lock == 'activation_lock_disabled'){
+                                return i18n.t('disabled');
+                            }
+                            if(item.activation_lock == 'not_supported'){
+                                return i18n.t('unsupported');
+                            }
+                        })))
+                        
             // Firewall
             var fw_states = [i18n.t('disabled'), i18n.t('enabled'), i18n.t('security.block_all')]
             var firewall_state = parseInt(item.firewall_state);
