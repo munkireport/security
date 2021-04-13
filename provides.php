@@ -17,6 +17,7 @@ return array(
 	    'ssh_state' => array('view' => 'ssh_state_widget'),
 	    't2_externalboot' => array('view' => 't2_externalboot_widget'),
 	    't2_secureboot' => array('view' => 't2_secureboot_widget'),
+	    'activation_lock' => array('view' => 'activation_lock_widget'),
     ),
     'reports' => array(
         'security' => array('view' => 'security', 'i18n' => 'security.report'),

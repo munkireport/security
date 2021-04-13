@@ -87,6 +87,12 @@ $(document).on('appReady', function(){
                                 return i18n.t('security.unsupported');
                             }
                        })))
+                .append($('<tr>')
+                    .append($('<th>')
+                        .text(i18n.t('security.activation_lock')))
+                    .append($('<td class="mr-activation_lock">')
+                        .text(item.activation_lock)))
+                       
             // Firewall
             var fw_states = [i18n.t('disabled'), i18n.t('enabled'), i18n.t('security.block_all')]
             var firewall_state = parseInt(item.firewall_state);

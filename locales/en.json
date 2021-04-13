@@ -1,6 +1,7 @@
 {
     "ard_groups": "ARD Groups",
     "ard_users": "ARD Users",
+    "activation_lock_status": "Activation Lock Status",
     "block_all": "Block All",
     "firewall_state": "Firewall State",
     "firmwarepw": "Firmware Password",
