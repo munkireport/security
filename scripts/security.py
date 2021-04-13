@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/python
 """
 Extracts information about SIP, Gatekeeper, and users who have remote access.
 """
