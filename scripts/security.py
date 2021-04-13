@@ -50,6 +50,7 @@ def activation_lock_check():
             for key in item:
                 if key == "activation_lock_status":
                      return item[key]
+            return "not_supported" 
     except Exception:
         return "not_supported"
 
