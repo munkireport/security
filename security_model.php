@@ -66,6 +66,7 @@ class Security_model extends \Model
     {
 	$sql = "SELECT COUNT(CASE WHEN activation_lock = 'activation_lock_enabled' THEN 1 END) AS Enabled,
 		COUNT(CASE WHEN activation_lock = 'activation_lock_disabled' THEN 1 END) AS Disabled
+		COUNT(CASE WHEN activation_lock = 'not_supported' THEN 1 END) as Notsupported
 		FROM security
 		LEFT JOIN reportdata USING(serial_number)
 		".get_machine_group_filter();

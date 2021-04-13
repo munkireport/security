@@ -230,7 +230,7 @@
                         return '<span class="label label-danger">'+i18n.t('enabled')+'</span>';
                     } else if (activation_lock == 'activation_lock_disabled'){
                         return '<span class="label label-success">'+i18n.t('disabled')+'</span>';
-                    } else {
+                    } else if (activation_lock == 'not_supported'){
                         return '<span class="label label-info">'+i18n.t('security.unsupported')+'</span>';
                     }
                     // if root_user is null, we don't have data

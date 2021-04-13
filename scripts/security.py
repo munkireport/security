@@ -51,7 +51,7 @@ def activation_lock_check():
                 if key == "activation_lock_status":
                      return item[key]
     except Exception:
-        return {}
+        return "not_supported"
 
 
 def t2_chip_check():

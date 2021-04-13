@@ -24,6 +24,11 @@
 						<span class="activation_lock-label"></span>
 						<span data-i18n="disabled"></span>
 					</a>
+					<a id="activation_lock-Notsupported" class="btn btn-info hide">
+						<span class="activation_lock-count bigger-150"></span><br>
+						<span class="activation_lock-label"></span>
+						<span data-i18n="unsupported"></span>
+					</a>
 
           <span id="activation_lock-nodata" data-i18n="no_clients"></span>
 
@@ -47,6 +52,7 @@ $(document).on('appUpdate', function(e, lang) {
 	var url = appUrl + '/show/listing/security/security'
 	$('#activation_lock-Enabled').attr('href', url + "#activation_lock_enabled")
 	$('#activation_lock-Disabled').attr('href', url + "#activation_lock_disabled")
+	$('#activation_lock-Notsupported').attr('href', url + "#not_suppported")
 
         // Show no clients span
         $('#activation_lock-nodata').removeClass('hide');

@@ -98,6 +98,9 @@ $(document).on('appReady', function(){
                             if(item.activation_lock == 'activation_lock_disabled'){
                                 return i18n.t('disabled');
                             }
+                            if(item.activation_lock == 'not_supported'){
+                                return i18n.t('unsupported');
+                            }
                         })))
                         
             // Firewall
