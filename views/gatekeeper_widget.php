@@ -1,17 +1,17 @@
 		<div class="col-lg-4 col-md-6">
 
-			<div class="panel panel-default">
+			<div class="card">
 
-				<div class="panel-heading">
+				<div class="card-header">
 
-					<h3 class="panel-title"><i class="fa fa-lock"></i>
+					<i class="fa fa-lock"></i>
 					    <span data-i18n="security.gatekeeper"></span>
-					    <list-link data-url="/show/listing/security/security"></list-link>
-					</h3>
+					    <a href="/show/listing/security/security" class="pull-right"><i class="fa fa-list"></i></a>
+					
 
 				</div>
 
-				<div class="panel-body text-center">
+				<div class="card-body text-center">
 
 
 					<a id="gatekeeper-Disabled" class="btn btn-danger hide">

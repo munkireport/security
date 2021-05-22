@@ -1,19 +1,11 @@
 <div class="col-lg-4 col-md-6">
-
-    <div id="firewall-state-widget" class="panel panel-default">
-
-        <div class="panel-heading">
-
-            <h3 class="panel-title"><i class="fa fa-fire"></i>
-                <span data-i18n="security.firewall_state"></span>
-                <list-link data-url="/show/listing/security/security"></list-link>
-            </h3>
-
+    <div id="firewall-state-widget" class="card">
+        <div class="card-header">
+            <i class="fa fa-fire"></i>
+            <span data-i18n="security.firewall_state"></span>
+            <a href="/show/listing/security/security" class="pull-right"><i class="fa fa-list"></i></a>
         </div>
-
-        <div class="panel-body text-center">
-
-
+        <div class="card-body text-center">
             <a id="fw-disabled" class="btn btn-danger hide">
                 <span class="fw-count bigger-150"></span><br>
                 <span data-i18n="disabled"></span>
@@ -28,11 +20,8 @@
             </a>
 
             <span id="fw-nodata" data-i18n="no_clients"></span>
-
         </div>
-
     </div><!-- /panel -->
-
 </div><!-- /col -->
 
 <script>
