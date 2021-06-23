@@ -12,7 +12,7 @@
 		        <th data-i18n="username" data-colname='reportdata.long_username'></th>
 		        <th data-i18n="filevault_status.users" data-colname='filevault_status.filevault_users'></th>
 		        <th data-i18n="type"data-colname='machine.machine_name'></th>
-		        <th data-i18n="disk_report.encryption_status" data-colname='diskreport.encrypted'></th>
+		        <th data-i18n="filevault_status.filevault_status" data-colname='filevault_status.filevault_status'></th>
 		        <th data-i18n="security.gatekeeper" data-colname='security.gatekeeper'></th>
 		        <th data-i18n="security.sip" data-colname='security.sip'></th>
 		        <th data-i18n="security.firmwarepw" data-colname='security.firmwarepw'></th>
