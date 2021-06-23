@@ -94,15 +94,6 @@
                         d.search.value = '';
                     }
 
-                    // Only search on bootvolume
-                    d.where = [
-                        {
-                            table: 'diskreport',
-                            column: 'mountpoint',
-                            value: '/'
-                        }
-                    ];
-
                 }
             },
             dom: mr.dt.buttonDom,
