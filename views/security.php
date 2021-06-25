@@ -12,7 +12,7 @@
 
 		<?php $widget->view($this, 'sip'); ?>
 
-		<?php $widget->view($this, 'filevault'); ?>
+		<?php $widget->view($this, 'filevault_status'); ?>
 
 	</div> <!-- /row -->
 
