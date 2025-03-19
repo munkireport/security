@@ -453,7 +453,7 @@ def firewall_enable_check():
     """Checks to see if firewall is by calling the preference domain.
     Doing it this way because we want to check if it's enabled via profile"""
 
-    return CFPreferencesCopyAppValue('globalstate', 'com.apple.alf')
+    return CFPreferencesCopyAppValue('globalstate', '/usr/libexec/ApplicationFirewall/com.apple.alf')
 
 def skel_state_check():
     """Checks to see if Secure Kernel Extension Loading ("SKEL") is enabled or disabled.
