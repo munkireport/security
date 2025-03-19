@@ -560,7 +560,6 @@ def main():
         result.update({'t2_externalboot': "EXTERNALBOOT_UNSUPPORTED"})
     result.update({'activation_lock': activation_lock_check()})
     result.update(get_filevault_status())
-    print(result)
 
     # Write results of checks to cache file
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
