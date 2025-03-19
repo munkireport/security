@@ -452,8 +452,14 @@ def firmware_pw_check():
 def firewall_enable_check():
     """Checks to see if firewall is by calling the preference domain.
     Doing it this way because we want to check if it's enabled via profile"""
+    os = subprocess.check_output(["sw_vers", "--productVersion"], text=True).strip()
+    major_version = int(os.split('.')[0])
+    if major_version >= 15:
+        alf_plist = '/usr/libexec/ApplicationFirewall/com.apple.alf'
+    else:
+        alf_plist = 'com.apple.alf'
 
-    return CFPreferencesCopyAppValue('globalstate', '/usr/libexec/ApplicationFirewall/com.apple.alf')
+    return CFPreferencesCopyAppValue('globalstate', alf_plist)
 
 def skel_state_check():
     """Checks to see if Secure Kernel Extension Loading ("SKEL") is enabled or disabled.
@@ -554,6 +560,7 @@ def main():
         result.update({'t2_externalboot': "EXTERNALBOOT_UNSUPPORTED"})
     result.update({'activation_lock': activation_lock_check()})
     result.update(get_filevault_status())
+    print(result)
 
     # Write results of checks to cache file
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
