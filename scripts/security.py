@@ -452,9 +452,7 @@ def firmware_pw_check():
 def firewall_enable_check():
     """Checks to see if firewall is by calling the preference domain.
     Doing it this way because we want to check if it's enabled via profile"""
-    os = subprocess.check_output(["sw_vers", "--productVersion"], text=True).strip()
-    major_version = int(os.split('.')[0])
-    if major_version >= 15:
+    if float(os.uname()[2][0:2]) >= 24:
         alf_plist = '/usr/libexec/ApplicationFirewall/com.apple.alf'
     else:
         alf_plist = 'com.apple.alf'
