@@ -9,7 +9,8 @@ buttons:
   - label: enabled
     i18n_label: enabled
     class: btn-danger
+    search_component: ssh_on
   - label: disabled
     i18n_label: disabled
     class: btn-success
-    search_component: SSH Disabled
+    search_component: ssh_off

@@ -151,6 +151,28 @@ var fv_state = function(colNumber, d){
     }
 }
 
+var ssh_state = function(colNumber, d){
+    // Look for 'Enabled' keyword
+    if(d.search.value.match(/^ssh_off$/))
+    {
+        // Add column specific search
+        d.columns[colNumber].search.value = 'SSH Disabled';
+        // Clear global search
+        d.search.value = '';
+    }
+
+    // Look for 'Disabled' keyword
+    if(d.search.value.match(/^ssh_on$/))
+    {
+        // Add column specific search
+        d.columns[colNumber].search.value = '^(?!.*SSH Disabled).*';
+        console.log("Column search value:", d.columns[colNumber].search.value);
+        // Clear global search
+        d.search.value = '';
+    }
+}
+
+
 var gatekeeper_state = function(colNumber, d){
     // Look for 'Enabled' keyword
     if(d.search.value.match(/^gatekeepr_off$/))

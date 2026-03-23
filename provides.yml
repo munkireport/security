@@ -42,3 +42,8 @@ widgets:
         view: dep_mdm_control_widget
     screen_locked:
         view: screen_locked_widget
+client_tabs:
+    security-tab:
+        view: security_tab
+        i18n: security.security
+#         badge: network-cnt

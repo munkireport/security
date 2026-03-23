@@ -4,6 +4,7 @@ table:
   - column: machine.computer_name
     i18n_header: listing.computername
     formatter: clientDetail
+    tab_link: security-tab
   - column: reportdata.serial_number
     i18n_header: serial
   - {i18n_header: username, column: reportdata.long_username}
@@ -17,7 +18,7 @@ table:
   - {i18n_header: security.firewall_state, column: security.firewall_state, formatter: formatSecurityFirewall, filter: firewall_state}
   - {i18n_header: security.skel.kext-loading, column: security.skel_state, formatter: formatSecuritySKEL}
   - {i18n_header: security.ssh_groups, column: security.ssh_groups}
-  - {i18n_header: security.ssh_users, column: security.ssh_users}
+  - {i18n_header: security.ssh_users, column: security.ssh_users, filter: ssh_state}
   - {i18n_header: security.ard_users, column: security.ard_users}
   - {i18n_header: security.ard_groups, column: security.ard_groups}
   - {i18n_header: security.apple_setup_timestamp, column: security.apple_setup_timestamp, formatter: formatSecuritytimestampToMoment}
