@@ -1,5 +1,5 @@
 <div class="col-lg-4">
-    <h4><i class="fa fa-key fa-fixed"></i> <span data-i18n="security.security"></span><a data-toggle="tab" title="Security" class="btn btn-xs pull-right" href="#security-tab" aria-expanded="false"><i class="fa fa-arrow-right"></i></a></h4>
+    <h4><i class="fa fa-key fa-fixed"></i> <span data-i18n="security.security"></span></h4>
     <table id="security-data" class="table"></table>
 </div>
 

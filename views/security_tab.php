@@ -1,19 +1,6 @@
 <div id="security-tab"></div>
-
-<div id="lister" style="font-size: large; float: right;">
-    <a href="/show/listing/security/security" title="List">
-        <i class="btn btn-default tab-btn fa fa-list"></i>
-    </a>
-</div>
-<div id="report_btn" style="font-size: large; float: right;">
-    <a href="/show/report/security/security" title="Report">
-        <i class="btn btn-default tab-btn fa fa-th"></i>
-    </a>
-</div>
 <h2 data-i18n="security.security"></h2>
-<div class="tab-pane col-md-6" id="security-tab">
-
-    
+<div class="tab-pane col-md-4" id="security-tab">
     <table class="table table-striped">
         <tr>
             <th data-i18n="security.gatekeeper"></th>
@@ -114,10 +101,10 @@ $(document).on('appReady', function(){
                     .text(i18n.t('no_data')));
             return;
         }
-        
+
         // Use first item from data array
         var item = data[0];
-        
+
         // Gatekeeper status
         $('#security-gatekeeper').html(function(){
             if(item.gatekeeper == 'Active'){
